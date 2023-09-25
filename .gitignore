@@ -1,4 +1,6 @@
 node_modules
+.idea
+.github
 .next
 .env.local
 workspace.code-workspace
@@ -37,3 +39,4 @@ snapshots
 
 .env
 .typebot-build
+/.env.prod
