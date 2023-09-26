@@ -7,6 +7,7 @@ import {
 } from '../providers/EditorProvider'
 import { useTypebot } from '../providers/TypebotProvider'
 import { BlocksSideBar } from './BlocksSideBar'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BoardMenuButton } from './BoardMenuButton'
 import { GettingStartedModal } from './GettingStartedModal'
 import { PreviewDrawer } from '@/features/preview/components/PreviewDrawer'
@@ -43,7 +44,7 @@ export const EditorPage = () => {
               <GraphProvider isReadOnly={isReadOnly}>
                 <GroupsCoordinatesProvider groups={typebot.groups}>
                   <Graph flex="1" typebot={typebot} key={typebot.id} />
-                  <BoardMenuButton pos="absolute" right="40px" top="20px" />
+                  {/*<BoardMenuButton pos="absolute" right="40px" top="20px" />*/}
                   <RightPanel />
                 </GroupsCoordinatesProvider>
               </GraphProvider>

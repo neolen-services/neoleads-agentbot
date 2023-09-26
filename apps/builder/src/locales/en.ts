@@ -1,7 +1,7 @@
 export default {
   back: 'Back',
   'confirmModal.defaultTitle': 'Are you sure?',
-  'dashboard.header.settingsButton.label': 'Settings & Members',
+  'dashboard.header.settingsButton.label': 'Settings',
   'dashboard.redirectionMessage': 'You are being redirected...',
   'dashboard.title': 'My typebots',
   delete: 'Delete',
@@ -14,7 +14,7 @@ export default {
   pending: 'Pending',
   skip: 'Skip',
   'folders.createFolderButton.label': 'Create a folder',
-  'folders.createTypebotButton.label': 'Create a typebot',
+  'folders.createTypebotButton.label': 'Create a Agent Bot',
   'folders.folderButton.deleteConfirmationMessage':
     'Are you sure you want to delete {folderName} folder? (Everything inside will be move to your dashboard)',
   'folders.typebotButton.live': 'Live',

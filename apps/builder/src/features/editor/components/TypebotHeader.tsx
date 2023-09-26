@@ -17,12 +17,14 @@ import {
 } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { isDefined, isNotDefined } from '@typebot.io/lib'
 import { EditableTypebotName } from './EditableTypebotName'
 import Link from 'next/link'
 import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useUndoShortcut } from '@/hooks/useUndoShortcut'
 import { useDebouncedCallback } from 'use-debounce'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CollaborationMenuButton } from '@/features/collaboration/components/CollaborationMenuButton'
 import { PublishButton } from '@/features/publish/components/PublishButton'
 import { headerHeight } from '../constants'
@@ -37,6 +39,7 @@ export const TypebotHeader = () => {
   const router = useRouter()
   const {
     typebot,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     publishedTypebot,
     updateTypebot,
     save,
@@ -77,7 +80,7 @@ export const TypebotHeader = () => {
   const handleHelpClick = () => {
     isCloudProdInstance()
       ? onOpen()
-      : window.open('https://docs.typebot.io', '_blank')
+      : window.open('https://guide.neoleads.in', '_blank')
   }
 
   return (
@@ -93,59 +96,59 @@ export const TypebotHeader = () => {
       flexShrink={0}
     >
       {isOpen && <SupportBubble autoShowDelay={0} />}
-      <HStack
-        display={['none', 'flex']}
-        pos={{ base: 'absolute', xl: 'static' }}
-        right={{ base: 280, xl: 0 }}
-      >
-        <Button
-          as={Link}
-          href={`/typebots/${typebot?.id}/edit`}
-          colorScheme={router.pathname.includes('/edit') ? 'blue' : 'gray'}
-          variant={router.pathname.includes('/edit') ? 'outline' : 'ghost'}
-          size="sm"
-        >
-          {scopedT('flowButton.label')}
-        </Button>
-        <Button
-          as={Link}
-          href={`/typebots/${typebot?.id}/theme`}
-          colorScheme={router.pathname.endsWith('theme') ? 'blue' : 'gray'}
-          variant={router.pathname.endsWith('theme') ? 'outline' : 'ghost'}
-          size="sm"
-        >
-          {scopedT('themeButton.label')}
-        </Button>
-        <Button
-          as={Link}
-          href={`/typebots/${typebot?.id}/settings`}
-          colorScheme={router.pathname.endsWith('settings') ? 'blue' : 'gray'}
-          variant={router.pathname.endsWith('settings') ? 'outline' : 'ghost'}
-          size="sm"
-        >
-          {scopedT('settingsButton.label')}
-        </Button>
-        <Button
-          as={Link}
-          href={`/typebots/${typebot?.id}/share`}
-          colorScheme={router.pathname.endsWith('share') ? 'blue' : 'gray'}
-          variant={router.pathname.endsWith('share') ? 'outline' : 'ghost'}
-          size="sm"
-        >
-          {scopedT('shareButton.label')}
-        </Button>
-        {isDefined(publishedTypebot) && (
-          <Button
-            as={Link}
-            href={`/typebots/${typebot?.id}/results`}
-            colorScheme={router.pathname.includes('results') ? 'blue' : 'gray'}
-            variant={router.pathname.includes('results') ? 'outline' : 'ghost'}
-            size="sm"
-          >
-            {scopedT('resultsButton.label')}
-          </Button>
-        )}
-      </HStack>
+      {/*<HStack*/}
+      {/*  display={['none', 'flex']}*/}
+      {/*  pos={{ base: 'absolute', xl: 'static' }}*/}
+      {/*  right={{ base: 280, xl: 0 }}*/}
+      {/*>*/}
+        {/*<Button*/}
+        {/*  as={Link}*/}
+        {/*  href={`/typebots/${typebot?.id}/edit`}*/}
+        {/*  colorScheme={router.pathname.includes('/edit') ? 'blue' : 'gray'}*/}
+        {/*  variant={router.pathname.includes('/edit') ? 'outline' : 'ghost'}*/}
+        {/*  size="sm"*/}
+        {/*>*/}
+        {/*  {scopedT('flowButton.label')}*/}
+        {/*</Button>*/}
+        {/*<Button*/}
+        {/*  as={Link}*/}
+        {/*  href={`/typebots/${typebot?.id}/theme`}*/}
+        {/*  colorScheme={router.pathname.endsWith('theme') ? 'blue' : 'gray'}*/}
+        {/*  variant={router.pathname.endsWith('theme') ? 'outline' : 'ghost'}*/}
+        {/*  size="sm"*/}
+        {/*>*/}
+        {/*  {scopedT('themeButton.label')}*/}
+        {/*</Button>*/}
+        {/*<Button*/}
+        {/*  as={Link}*/}
+        {/*  href={`/typebots/${typebot?.id}/settings`}*/}
+        {/*  colorScheme={router.pathname.endsWith('settings') ? 'blue' : 'gray'}*/}
+        {/*  variant={router.pathname.endsWith('settings') ? 'outline' : 'ghost'}*/}
+        {/*  size="sm"*/}
+        {/*>*/}
+        {/*  {scopedT('settingsButton.label')}*/}
+        {/*</Button>*/}
+        {/*<Button*/}
+        {/*  as={Link}*/}
+        {/*  href={`/typebots/${typebot?.id}/share`}*/}
+        {/*  colorScheme={router.pathname.endsWith('share') ? 'blue' : 'gray'}*/}
+        {/*  variant={router.pathname.endsWith('share') ? 'outline' : 'ghost'}*/}
+        {/*  size="sm"*/}
+        {/*>*/}
+        {/*  {scopedT('shareButton.label')}*/}
+        {/*</Button>*/}
+        {/*{isDefined(publishedTypebot) && (*/}
+        {/*  <Button*/}
+        {/*    as={Link}*/}
+        {/*    href={`/typebots/${typebot?.id}/results`}*/}
+        {/*    colorScheme={router.pathname.includes('results') ? 'blue' : 'gray'}*/}
+        {/*    variant={router.pathname.includes('results') ? 'outline' : 'ghost'}*/}
+        {/*    size="sm"*/}
+        {/*  >*/}
+        {/*    {scopedT('resultsButton.label')}*/}
+        {/*  </Button>*/}
+        {/*)}*/}
+      {/*</HStack>*/}
       <HStack
         pos="absolute"
         left="1rem"
@@ -239,7 +242,7 @@ export const TypebotHeader = () => {
       </HStack>
 
       <HStack right="40px" pos="absolute" display={['none', 'flex']}>
-        <CollaborationMenuButton isLoading={isNotDefined(typebot)} />
+        {/*<CollaborationMenuButton isLoading={isNotDefined(typebot)} />*/}
         {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
           <Button
             colorScheme="gray"

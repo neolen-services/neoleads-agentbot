@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   Modal,
   ModalOverlay,
@@ -34,8 +35,8 @@ type Props = {
 }
 
 type SettingsTab =
-  | 'my-account'
   | 'user-settings'
+  | 'my-account'
   | 'workspace-settings'
   | 'members'
   | 'billing'
@@ -48,7 +49,7 @@ export const WorkspaceSettingsModal = ({
 }: Props) => {
   const scopedT = useScopedI18n('workspace.settings.modal')
   const { currentRole } = useWorkspace()
-  const [selectedTab, setSelectedTab] = useState<SettingsTab>('my-account')
+  const [selectedTab, setSelectedTab] = useState<SettingsTab>('user-settings')
 
   const canEditWorkspace = currentRole === WorkspaceRole.ADMIN
 
@@ -65,25 +66,25 @@ export const WorkspaceSettingsModal = ({
         >
           <Stack spacing={8}>
             <Stack>
-              <Text pl="4" color="gray.500">
-                {user.email}
-              </Text>
-              <Button
-                variant={selectedTab === 'my-account' ? 'solid' : 'ghost'}
-                onClick={() => setSelectedTab('my-account')}
-                leftIcon={
-                  <Avatar
-                    name={user.name ?? undefined}
-                    src={user.image ?? undefined}
-                    boxSize="15px"
-                  />
-                }
-                size="sm"
-                justifyContent="flex-start"
-                pl="4"
-              >
-                {scopedT('menu.myAccount.label')}
-              </Button>
+              {/*<Text pl="4" color="gray.500">*/}
+              {/*  {user.email}*/}
+              {/*</Text>*/}
+              {/*<Button*/}
+              {/*  variant={selectedTab === 'my-account' ? 'solid' : 'ghost'}*/}
+              {/*  onClick={() => setSelectedTab('my-account')}*/}
+              {/*  leftIcon={*/}
+              {/*    <Avatar*/}
+              {/*      name={user.name ?? undefined}*/}
+              {/*      src={user.image ?? undefined}*/}
+              {/*      boxSize="15px"*/}
+              {/*    />*/}
+              {/*  }*/}
+              {/*  size="sm"*/}
+              {/*  justifyContent="flex-start"*/}
+              {/*  pl="4"*/}
+              {/*>*/}
+              {/*  {scopedT('menu.myAccount.label')}*/}
+              {/*</Button>*/}
               <Button
                 variant={selectedTab === 'user-settings' ? 'solid' : 'ghost'}
                 onClick={() => setSelectedTab('user-settings')}
@@ -95,55 +96,55 @@ export const WorkspaceSettingsModal = ({
                 {scopedT('menu.preferences.label')}
               </Button>
             </Stack>
-            <Stack>
-              <Text pl="4" color="gray.500">
-                {scopedT('menu.workspace.label')}
-              </Text>
-              {canEditWorkspace && (
-                <Button
-                  variant={
-                    selectedTab === 'workspace-settings' ? 'solid' : 'ghost'
-                  }
-                  onClick={() => setSelectedTab('workspace-settings')}
-                  leftIcon={
-                    <EmojiOrImageIcon
-                      icon={workspace.icon}
-                      boxSize="15px"
-                      defaultIcon={HardDriveIcon}
-                    />
-                  }
-                  size="sm"
-                  justifyContent="flex-start"
-                  pl="4"
-                >
-                  {scopedT('menu.settings.label')}
-                </Button>
-              )}
-              <Button
-                variant={selectedTab === 'members' ? 'solid' : 'ghost'}
-                onClick={() => setSelectedTab('members')}
-                leftIcon={<UsersIcon />}
-                size="sm"
-                justifyContent="flex-start"
-                pl="4"
-              >
-                {scopedT('menu.members.label')}
-              </Button>
-              {canEditWorkspace && (
-                <Button
-                  variant={selectedTab === 'billing' ? 'solid' : 'ghost'}
-                  onClick={() => setSelectedTab('billing')}
-                  leftIcon={<CreditCardIcon />}
-                  size="sm"
-                  justifyContent="flex-start"
-                  pl="4"
-                  overflow="scroll"
-                  className="hide-scrollbar"
-                >
-                  {scopedT('menu.billingAndUsage.label')}
-                </Button>
-              )}
-            </Stack>
+            {/*<Stack>*/}
+            {/*  <Text pl="4" color="gray.500">*/}
+            {/*    {scopedT('menu.workspace.label')}*/}
+            {/*  </Text>*/}
+            {/*  {canEditWorkspace && (*/}
+            {/*    <Button*/}
+            {/*      variant={*/}
+            {/*        selectedTab === 'workspace-settings' ? 'solid' : 'ghost'*/}
+            {/*      }*/}
+            {/*      onClick={() => setSelectedTab('workspace-settings')}*/}
+            {/*      leftIcon={*/}
+            {/*        <EmojiOrImageIcon*/}
+            {/*          icon={workspace.icon}*/}
+            {/*          boxSize="15px"*/}
+            {/*          defaultIcon={HardDriveIcon}*/}
+            {/*        />*/}
+            {/*      }*/}
+            {/*      size="sm"*/}
+            {/*      justifyContent="flex-start"*/}
+            {/*      pl="4"*/}
+            {/*    >*/}
+            {/*      {scopedT('menu.settings.label')}*/}
+            {/*    </Button>*/}
+            {/*  )}*/}
+            {/*  <Button*/}
+            {/*    variant={selectedTab === 'members' ? 'solid' : 'ghost'}*/}
+            {/*    onClick={() => setSelectedTab('members')}*/}
+            {/*    leftIcon={<UsersIcon />}*/}
+            {/*    size="sm"*/}
+            {/*    justifyContent="flex-start"*/}
+            {/*    pl="4"*/}
+            {/*  >*/}
+            {/*    {scopedT('menu.members.label')}*/}
+            {/*  </Button>*/}
+            {/*  {canEditWorkspace && (*/}
+            {/*    <Button*/}
+            {/*      variant={selectedTab === 'billing' ? 'solid' : 'ghost'}*/}
+            {/*      onClick={() => setSelectedTab('billing')}*/}
+            {/*      leftIcon={<CreditCardIcon />}*/}
+            {/*      size="sm"*/}
+            {/*      justifyContent="flex-start"*/}
+            {/*      pl="4"*/}
+            {/*      overflow="scroll"*/}
+            {/*      className="hide-scrollbar"*/}
+            {/*    >*/}
+            {/*      {scopedT('menu.billingAndUsage.label')}*/}
+            {/*    </Button>*/}
+            {/*  )}*/}
+            {/*</Stack>*/}
           </Stack>
 
           <Flex justify="center" pt="10">
