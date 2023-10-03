@@ -19,7 +19,32 @@ import { Redis } from '@upstash/redis/nodejs'
 import got from 'got'
 import { env } from '@typebot.io/env'
 
-const providers: Provider[] = []
+const providers: Provider[] = [
+  {
+    id: 'custom-oauth',
+    name: "Neoleads",
+    type: "oauth",
+    version: "2.0",
+    clientId: env.NEOLEADS_OAUTH_CLIENT_ID,
+    clientSecret: env.NEOLEADS_OAUTH_CLIENT_SECRET,
+    authorization: env.NEOLEADS_OAUTH_URL+"/auth/sso/authorize",
+    token: env.NEOLEADS_OAUTH_URL+"/auth/sso/access_token",
+    userinfo: env.NEOLEADS_OAUTH_URL+"/auth/sso/ok.json",
+    profile: async (profile, tokens) => {
+      // Append the access token to the userinfo URL
+      const userinfoUrlWithToken = `${env.NEOLEADS_OAUTH_URL}/auth/sso/user.json?oauth_token=${tokens.access_token}`;
+      // Fetch the user's profile information using the modified URL
+      const response = await fetch(userinfoUrlWithToken)
+      const userInfo = await response.json()
+      return {
+        id: userInfo.id,
+        name: userInfo.info.name,
+        email: userInfo.info.email,
+        image: '',
+      } as User
+    },
+  }
+]
 
 let rateLimit: Ratelimit | undefined
 

@@ -117,6 +117,14 @@ const customOAuthEnv = {
   },
 }
 
+const neoleadsOAuthEnv = {
+  server: {
+    NEOLEADS_OAUTH_CLIENT_ID: z.string().min(1).optional(),
+    NEOLEADS_OAUTH_CLIENT_SECRET: z.string().min(1).optional(),
+    NEOLEADS_OAUTH_URL: z.string().url().optional(),
+  },
+}
+
 const googleEnv = {
   server: {
     GOOGLE_CLIENT_ID: z.string().min(1).optional(),
@@ -293,6 +301,7 @@ export const env = createEnv({
     ...gitlabEnv.server,
     ...azureEnv.server,
     ...customOAuthEnv.server,
+    ...neoleadsOAuthEnv.server,
     ...sentryEnv.server,
     ...telemetryEnv.server,
   },
