@@ -1,7 +1,5 @@
 import {
-  Button,
   HTMLChakraProps,
-  Input,
   Stack,
   HStack,
   Text,
@@ -20,7 +18,6 @@ import {
   signIn,
   useSession,
 } from 'next-auth/react'
-import { DividerWithText } from './DividerWithText'
 import { SocialLoginButtons } from './SocialLoginButtons'
 import { useRouter } from 'next/router'
 import { BuiltInProviderType } from 'next-auth/providers'
@@ -38,6 +35,7 @@ export const SignInForm = ({
   const scopedT = useScopedI18n('auth')
   const router = useRouter()
   const { status } = useSession()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [authLoading, setAuthLoading] = useState(false)
   const [isLoadingProviders, setIsLoadingProviders] = useState(true)
 
@@ -65,9 +63,11 @@ export const SignInForm = ({
     })()
   }, [status, router])
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
     setEmailValue(e.target.value)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleEmailSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (isMagicLinkSent) return
@@ -100,7 +100,7 @@ export const SignInForm = ({
       <Text>
         {scopedT('noProvider.preLink')}{' '}
         <TextLink
-          href="https://docs.typebot.io/self-hosting/configuration"
+          href="https://guide.neoleads.in"
           isExternal
         >
           {scopedT('noProvider.link')}
@@ -112,33 +112,33 @@ export const SignInForm = ({
       {!isMagicLinkSent && (
         <>
           <SocialLoginButtons providers={providers} />
-          {providers?.email && (
-            <>
-              <DividerWithText mt="6">
-                {scopedT('orEmailLabel')}
-              </DividerWithText>
-              <HStack as="form" onSubmit={handleEmailSubmit}>
-                <Input
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="email@company.com"
-                  required
-                  value={emailValue}
-                  onChange={handleEmailChange}
-                />
-                <Button
-                  type="submit"
-                  isLoading={
-                    ['loading', 'authenticated'].includes(status) || authLoading
-                  }
-                  isDisabled={isMagicLinkSent}
-                >
-                  {scopedT('emailSubmitButton.label')}
-                </Button>
-              </HStack>
-            </>
-          )}
+          {/*{providers?.email && (*/}
+          {/*  <>*/}
+          {/*    <DividerWithText mt="6">*/}
+          {/*      {scopedT('orEmailLabel')}*/}
+          {/*    </DividerWithText>*/}
+          {/*    <HStack as="form" onSubmit={handleEmailSubmit}>*/}
+          {/*      <Input*/}
+          {/*        name="email"*/}
+          {/*        type="email"*/}
+          {/*        autoComplete="email"*/}
+          {/*        placeholder="email@company.com"*/}
+          {/*        required*/}
+          {/*        value={emailValue}*/}
+          {/*        onChange={handleEmailChange}*/}
+          {/*      />*/}
+          {/*      <Button*/}
+          {/*        type="submit"*/}
+          {/*        isLoading={*/}
+          {/*          ['loading', 'authenticated'].includes(status) || authLoading*/}
+          {/*        }*/}
+          {/*        isDisabled={isMagicLinkSent}*/}
+          {/*      >*/}
+          {/*        {scopedT('emailSubmitButton.label')}*/}
+          {/*      </Button>*/}
+          {/*    </HStack>*/}
+          {/*  </>*/}
+          {/*)}*/}
         </>
       )}
       {router.query.error && (
