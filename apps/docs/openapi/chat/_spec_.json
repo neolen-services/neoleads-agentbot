@@ -1148,7 +1148,8 @@
                                                     "additionalProperties": false
                                                   },
                                                   "sizeLimit": {
-                                                    "type": "number"
+                                                    "type": "number",
+                                                    "description": "Deprecated"
                                                   }
                                                 },
                                                 "required": [
@@ -1573,6 +1574,7 @@
                                                     "enum": [
                                                       "Custom",
                                                       "Empty",
+                                                      "Environment name",
                                                       "User ID",
                                                       "Now",
                                                       "Today",
@@ -3760,8 +3762,8 @@
                                   "whatsApp": {
                                     "type": "object",
                                     "properties": {
-                                      "credentialsId": {
-                                        "type": "string"
+                                      "isEnabled": {
+                                        "type": "boolean"
                                       },
                                       "startCondition": {
                                         "type": "object",
@@ -3814,6 +3816,12 @@
                                           "comparisons"
                                         ],
                                         "additionalProperties": false
+                                      },
+                                      "sessionExpiryTimeout": {
+                                        "type": "number",
+                                        "maximum": 48,
+                                        "minimum": 0.01,
+                                        "description": "Expiration delay in hours after latest interaction"
                                       }
                                     },
                                     "additionalProperties": false
@@ -5075,7 +5083,8 @@
                                       "additionalProperties": false
                                     },
                                     "sizeLimit": {
-                                      "type": "number"
+                                      "type": "number",
+                                      "description": "Deprecated"
                                     }
                                   },
                                   "required": [
@@ -5737,7 +5746,14 @@
                                             "type": "string"
                                           },
                                           "pixelId": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "description": "Deprecated"
+                                          },
+                                          "pixelIds": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
                                           },
                                           "gtmId": {
                                             "type": "string"
@@ -6170,8 +6186,8 @@
                             "whatsApp": {
                               "type": "object",
                               "properties": {
-                                "credentialsId": {
-                                  "type": "string"
+                                "isEnabled": {
+                                  "type": "boolean"
                                 },
                                 "startCondition": {
                                   "type": "object",
@@ -6224,6 +6240,12 @@
                                     "comparisons"
                                   ],
                                   "additionalProperties": false
+                                },
+                                "sessionExpiryTimeout": {
+                                  "type": "number",
+                                  "maximum": 48,
+                                  "minimum": 0.01,
+                                  "description": "Expiration delay in hours after latest interaction"
                                 }
                               },
                               "additionalProperties": false
@@ -6381,28 +6403,48 @@
                 "type": "object",
                 "properties": {
                   "filePathProps": {
-                    "type": "object",
-                    "properties": {
-                      "typebotId": {
-                        "type": "string"
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "typebotId": {
+                            "type": "string"
+                          },
+                          "blockId": {
+                            "type": "string"
+                          },
+                          "resultId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "typebotId",
+                          "blockId",
+                          "resultId",
+                          "fileName"
+                        ],
+                        "additionalProperties": false
                       },
-                      "blockId": {
-                        "type": "string"
-                      },
-                      "resultId": {
-                        "type": "string"
-                      },
-                      "fileName": {
-                        "type": "string"
+                      {
+                        "type": "object",
+                        "properties": {
+                          "sessionId": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "sessionId",
+                          "fileName"
+                        ],
+                        "additionalProperties": false
                       }
-                    },
-                    "required": [
-                      "typebotId",
-                      "blockId",
-                      "resultId",
-                      "fileName"
-                    ],
-                    "additionalProperties": false
+                    ]
                   },
                   "fileType": {
                     "type": "string"
@@ -6428,12 +6470,17 @@
                     "presignedUrl": {
                       "type": "string"
                     },
+                    "formData": {
+                      "type": "object",
+                      "additionalProperties": {}
+                    },
                     "fileUrl": {
                       "type": "string"
                     }
                   },
                   "required": [
                     "presignedUrl",
+                    "formData",
                     "fileUrl"
                   ],
                   "additionalProperties": false
@@ -6496,439 +6543,13 @@
         }
       }
     },
-    "/whatsapp/preview/webhook": {
-      "get": {
-        "operationId": "whatsAppRouter-subscribePreviewWebhook",
-        "summary": "WhatsApp",
-        "parameters": [
-          {
-            "name": "hub.challenge",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "hub.verify_token",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/error"
-          }
-        }
-      },
-      "post": {
-        "operationId": "whatsAppRouter-receiveMessagePreview",
-        "summary": "WhatsApp",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "entry": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "changes": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "value": {
-                                "type": "object",
-                                "properties": {
-                                  "contacts": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "profile": {
-                                          "type": "object",
-                                          "properties": {
-                                            "name": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "name"
-                                          ],
-                                          "additionalProperties": false
-                                        }
-                                      },
-                                      "required": [
-                                        "profile"
-                                      ],
-                                      "additionalProperties": false
-                                    }
-                                  },
-                                  "metadata": {
-                                    "type": "object",
-                                    "properties": {
-                                      "display_phone_number": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "display_phone_number"
-                                    ],
-                                    "additionalProperties": false
-                                  },
-                                  "messages": {
-                                    "type": "array",
-                                    "items": {
-                                      "anyOf": [
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "text"
-                                              ]
-                                            },
-                                            "text": {
-                                              "type": "object",
-                                              "properties": {
-                                                "body": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "body"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "text",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        },
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "button"
-                                              ]
-                                            },
-                                            "button": {
-                                              "type": "object",
-                                              "properties": {
-                                                "text": {
-                                                  "type": "string"
-                                                },
-                                                "payload": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "text",
-                                                "payload"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "button",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        },
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "interactive"
-                                              ]
-                                            },
-                                            "interactive": {
-                                              "type": "object",
-                                              "properties": {
-                                                "button_reply": {
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "id": {
-                                                      "type": "string"
-                                                    },
-                                                    "title": {
-                                                      "type": "string"
-                                                    }
-                                                  },
-                                                  "required": [
-                                                    "id",
-                                                    "title"
-                                                  ],
-                                                  "additionalProperties": false
-                                                }
-                                              },
-                                              "required": [
-                                                "button_reply"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "interactive",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        },
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "image"
-                                              ]
-                                            },
-                                            "image": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "id"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "image",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        },
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "video"
-                                              ]
-                                            },
-                                            "video": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "id"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "video",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        },
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "audio"
-                                              ]
-                                            },
-                                            "audio": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "id"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "audio",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        },
-                                        {
-                                          "type": "object",
-                                          "properties": {
-                                            "from": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string",
-                                              "enum": [
-                                                "document"
-                                              ]
-                                            },
-                                            "document": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "id"
-                                              ],
-                                              "additionalProperties": false
-                                            },
-                                            "timestamp": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "from",
-                                            "type",
-                                            "document",
-                                            "timestamp"
-                                          ],
-                                          "additionalProperties": false
-                                        }
-                                      ]
-                                    }
-                                  }
-                                },
-                                "required": [
-                                  "metadata"
-                                ],
-                                "additionalProperties": false
-                              }
-                            },
-                            "required": [
-                              "value"
-                            ],
-                            "additionalProperties": false
-                          }
-                        }
-                      },
-                      "required": [
-                        "changes"
-                      ],
-                      "additionalProperties": false
-                    }
-                  }
-                },
-                "required": [
-                  "entry"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "message"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/error"
-          }
-        }
-      }
-    },
-    "/workspaces/{workspaceId}/whatsapp/phoneNumbers/{phoneNumberId}/webhook": {
+    "/workspaces/{workspaceId}/whatsapp/{credentialsId}/webhook": {
       "get": {
         "operationId": "whatsAppRouter-subscribeWebhook",
-        "summary": "Subscribe WhatsApp webhook",
+        "summary": "Subscribe webhook",
+        "tags": [
+          "WhatsApp"
+        ],
         "security": [
           {
             "Authorization": []
@@ -6944,7 +6565,7 @@
             }
           },
           {
-            "name": "phoneNumberId",
+            "name": "credentialsId",
             "in": "path",
             "required": true,
             "schema": {
@@ -6986,7 +6607,10 @@
       },
       "post": {
         "operationId": "whatsAppRouter-receiveMessage",
-        "summary": "Receive WhatsApp Message",
+        "summary": "Message webhook",
+        "tags": [
+          "WhatsApp"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -7007,6 +6631,18 @@
                               "value": {
                                 "type": "object",
                                 "properties": {
+                                  "metadata": {
+                                    "type": "object",
+                                    "properties": {
+                                      "phone_number_id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "phone_number_id"
+                                    ],
+                                    "additionalProperties": false
+                                  },
                                   "contacts": {
                                     "type": "array",
                                     "items": {
@@ -7030,18 +6666,6 @@
                                       ],
                                       "additionalProperties": false
                                     }
-                                  },
-                                  "metadata": {
-                                    "type": "object",
-                                    "properties": {
-                                      "display_phone_number": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "display_phone_number"
-                                    ],
-                                    "additionalProperties": false
                                   },
                                   "messages": {
                                     "type": "array",
@@ -7358,75 +6982,7 @@
             }
           },
           {
-            "name": "phoneNumberId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "message"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/error"
-          }
-        }
-      }
-    },
-    "/typebots/{typebotId}/whatsapp/start-preview": {
-      "post": {
-        "operationId": "whatsAppRouter-startWhatsAppPreview",
-        "summary": "Start WhatsApp Preview",
-        "security": [
-          {
-            "Authorization": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "to": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "startGroupId": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "to"
-                ],
-                "additionalProperties": false
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "typebotId",
+            "name": "credentialsId",
             "in": "path",
             "required": true,
             "schema": {

@@ -1,29 +1,22 @@
 import React from 'react'
 import { HStack, Flex, Button, useDisclosure } from '@chakra-ui/react'
-import { SettingsIcon } from '@/components/icons'
-import { signOut } from 'next-auth/react'
+import { HardDriveIcon, SettingsIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import { isNotDefined } from '@typebot.io/lib'
 import Link from 'next/link'
 import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import { useScopedI18n } from '@/locales'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
 import { WorkspaceSettingsModal } from '@/features/workspace/components/WorkspaceSettingsModal'
 
 export const DashboardHeader = () => {
   const scopedT = useScopedI18n('dashboard.header')
-  const { user } = useUser()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { user, logOut } = useUser()
   const { workspace, switchWorkspace, createWorkspace } = useWorkspace()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleLogOut = () => {
-    signOut()
-  }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const handleCreateNewWorkspace = () =>
     createWorkspace(user?.name ?? undefined)
 
@@ -36,10 +29,11 @@ export const DashboardHeader = () => {
         maxW="1000px"
         flex="1"
       >
-        <Link href="" data-testid="typebot-logo">
+        <Link href="/typebots" data-testid="typebot-logo">
           <EmojiOrImageIcon
             boxSize="30px"
-            icon={'/icons/logo.svg'}
+            icon={workspace?.icon}
+            defaultIcon={HardDriveIcon}
           />
         </Link>
         <HStack>
@@ -58,12 +52,12 @@ export const DashboardHeader = () => {
           >
             {scopedT('settingsButton.label')}
           </Button>
-          {/*<WorkspaceDropdown*/}
-          {/*  currentWorkspace={workspace}*/}
-          {/*  onLogoutClick={handleLogOut}*/}
-          {/*  onCreateNewWorkspaceClick={handleCreateNewWorkspace}*/}
-          {/*  onWorkspaceSelected={switchWorkspace}*/}
-          {/*/>*/}
+          <WorkspaceDropdown
+            currentWorkspace={workspace}
+            onLogoutClick={logOut}
+            onCreateNewWorkspaceClick={handleCreateNewWorkspace}
+            onWorkspaceSelected={switchWorkspace}
+          />
         </HStack>
       </Flex>
     </Flex>
