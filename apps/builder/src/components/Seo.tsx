@@ -2,15 +2,15 @@ import Head from 'next/head'
 
 export const Seo = ({
   title,
-  description = 'Create and publish conversational forms that collect 4 times more answers and feel native to your product',
-  imagePreviewUrl = 'https://app.typebot.io/site-preview.png',
+  description = 'Create and publish custom AI Neoagents.',
+  imagePreviewUrl = 'https://neoleads.in/wp-content/uploads/2023/08/Neoleads-Logo-e1692428531140.png',
 }: {
   title: string
   description?: string
   currentUrl?: string
   imagePreviewUrl?: string
 }) => {
-  const formattedTitle = `${title} | Typebot`
+  const formattedTitle = `${title} | Neoagent`
 
   return (
     <Head>

@@ -72,7 +72,7 @@ export const createTypebot = authenticatedProcedure
       data: {
         version: '5',
         workspaceId,
-        name: typebot.name ?? 'My typebot',
+        name: typebot.name ?? 'My Neoagent',
         icon: typebot.icon,
         selectedThemeTemplateId: typebot.selectedThemeTemplateId,
         groups: typebot.groups

@@ -2,7 +2,6 @@ import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import {
   HardDriveIcon,
   ChevronLeftIcon,
-  PlusIcon,
   LogOutIcon,
 } from '@/components/icons'
 import { PlanTag } from '@/features/billing/components/PlanTag'
@@ -30,6 +29,7 @@ export const WorkspaceDropdown = ({
   currentWorkspace,
   onWorkspaceSelected,
   onLogoutClick,
+                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onCreateNewWorkspaceClick,
 }: Props) => {
   const scopedT = useScopedI18n('workspace.dropdown')
@@ -71,9 +71,9 @@ export const WorkspaceDropdown = ({
               </HStack>
             </MenuItem>
           ))}
-        <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
-          {scopedT('newButton.label')}
-        </MenuItem>
+        {/*<MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>*/}
+        {/*  {scopedT('newButton.label')}*/}
+        {/*</MenuItem>*/}
         <MenuItem
           onClick={onLogoutClick}
           icon={<LogOutIcon />}

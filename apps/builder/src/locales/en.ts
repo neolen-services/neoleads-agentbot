@@ -3,7 +3,7 @@ export default {
   'confirmModal.defaultTitle': 'Are you sure?',
   'dashboard.header.settingsButton.label': 'Settings',
   'dashboard.redirectionMessage': 'You are being redirected...',
-  'dashboard.title': 'My typebots',
+  'dashboard.title': 'My Neoagents',
   delete: 'Delete',
   errorMessage: 'An error occured',
   cancel: 'Cancel',
@@ -14,7 +14,7 @@ export default {
   pending: 'Pending',
   skip: 'Skip',
   'folders.createFolderButton.label': 'Create a folder',
-  'folders.createTypebotButton.label': 'Create a Agent Bot',
+  'folders.createTypebotButton.label': 'Create a NeoAgent',
   'folders.folderButton.deleteConfirmationMessage':
     'Are you sure you want to delete {folderName} folder? (Everything inside will be move to your dashboard)',
   'folders.typebotButton.live': 'Live',
@@ -23,12 +23,12 @@ export default {
   'folders.typebotButton.duplicate': 'Duplicate',
   'folders.typebotButton.delete': 'Delete',
   'folders.typebotButton.deleteConfirmationMessage':
-    'Are you sure you want to delete your typebot {typebotName}?',
+    'Are you sure you want to delete your neoagent {typebotName}?',
   'folders.typebotButton.deleteConfirmationMessageWarning':
     "All its associated data will be deleted and won't be recoverable.",
   'account.apiTokens.heading': 'API tokens',
   'account.apiTokens.description':
-    'These tokens allow other apps to control your whole account and typebots. Be careful!',
+    'These tokens allow other apps to control your whole account and neoagents. Be careful!',
   'account.apiTokens.createButton.label': 'Create',
   'account.apiTokens.deleteButton.label': 'Delete',
   'account.apiTokens.table.nameHeader': 'Name',
@@ -154,13 +154,13 @@ export default {
   'billing.usage.unlimited': 'Unlimited',
   'billing.usage.chats.heading': 'Chats',
   'billing.usage.chats.alert.soonReach':
-    "Your typebots are popular! You will soon reach your plan's chats limit. 🚀",
+    "Your neoagents are popular! You will soon reach your plan's chats limit. 🚀",
   'billing.usage.chats.alert.updatePlan':
     'Make sure to update your plan to increase this limit and continue chatting with your users.',
   'billing.usage.chats.resetInfo': '(resets on 1st of every month)',
   'billing.usage.storage.heading': 'Storage',
   'billing.usage.storage.alert.soonReach':
-    "Your typebots are popular! You will soon reach your plan's storage limit. 🚀",
+    "Your neoagents are popular! You will soon reach your plan's storage limit. 🚀",
   'billing.usage.storage.alert.updatePlan':
     'Make sure to update your plan in order to continue collecting uploaded files. You can also delete files to free up space.',
   'billing.limitMessage.brand': 'remove branding',
@@ -178,7 +178,7 @@ export default {
   'workspace.settings.name.label': 'Name:',
   'workspace.settings.deleteButton.label': 'Delete workspace',
   'workspace.settings.deleteButton.confirmMessage':
-    'Are you sure you want to delete {workspaceName} workspace? All its folders, typebots and results will be deleted forever.',
+    'Are you sure you want to delete {workspaceName} workspace? All its folders, neoagents and results will be deleted forever.',
   'workspace.settings.modal.menu.myAccount.label': 'My account',
   'workspace.settings.modal.menu.preferences.label': 'Preferences',
   'workspace.settings.modal.menu.workspace.label': 'Workspace',
@@ -188,7 +188,7 @@ export default {
   'workspace.settings.modal.menu.version.label': 'Version: {version}',
   'workspace.dropdown.newButton.label': 'New workspace',
   'workspace.dropdown.logoutButton.label': 'Log out',
-  'templates.buttons.heading': 'Create a new typebot',
+  'templates.buttons.heading': 'Create a new neoagent',
   'templates.buttons.fromScratchButton.label': 'Start from scratch',
   'templates.buttons.fromTemplateButton.label': 'Start from a template',
   'templates.buttons.importFileButton.label': 'Import a file',
@@ -198,7 +198,7 @@ export default {
   'templates.modal.menuHeading.new.tag': 'New',
   'templates.modal.useTemplateButton.label': 'Use this template',
   'templates.importFromFileButon.toastError.description':
-    "Failed to parse the file. Are you sure it's a typebot?",
+    "Failed to parse the file. Are you sure it's a neoagent?",
   'editor.headers.flowButton.label': 'Flow',
   'editor.headers.themeButton.label': 'Theme',
   'editor.headers.settingsButton.label': 'Settings',
@@ -254,7 +254,7 @@ export default {
   'editor.blockCard.inputBlock.tooltip.files.label': 'Upload Files',
   'editor.blockCard.logicBlock.tooltip.code.label': 'Execute Javascript code',
   'editor.blockCard.logicBlock.tooltip.typebotLink.label':
-    'Link and jump to another typebot',
+    'Link and jump to another neoagent',
   'editor.blockCard.logicBlock.tooltip.jump.label':
     'Fast forward the flow to another group',
   'editor.blockCard.integrationBlock.tooltip.googleSheets.label':
@@ -277,13 +277,13 @@ export default {
   'editor.gettingStartedModal.seeAction.time': '5 minutes',
   'editor.gettingStartedModal.seeAction.item.label': 'Other videos',
   'editor.provider.messages.getTypebotError.title':
-    'Error while fetching typebot. Refresh the page.',
+    'Error while fetching neoagent. Refresh the page.',
   'editor.provider.messages.getTypebotError.description':
-    "Couldn't find typebot",
+    "Couldn't find neoagent",
   'editor.provider.messages.publishedTypebotError.title':
-    'Error while fetching published typebot',
+    'Error while fetching published neoagent',
   'editor.provider.messages.updateTypebotError.title':
-    'Error while updating typebot',
+    'Error while updating neoagent',
   'editor.provider.groups.copy.title': 'copy',
   'editor.blocks.start.text': 'Start',
   'editor.blocks.bubbles.audio.settings.upload.label': 'Upload',

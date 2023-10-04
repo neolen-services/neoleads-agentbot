@@ -35,7 +35,7 @@ export const SignInPage = ({ type }: Props) => {
       {type === 'signin' ? (
         <Text>
           {scopedT('signin.noAccountLabel.preLink')}{' '}
-          <TextLink href="/register">
+          <TextLink href="https://app.neoleads.in/app/auth/signup">
             {scopedT('signin.noAccountLabel.link')}
           </TextLink>
         </Text>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { HStack, Flex, Button, useDisclosure } from '@chakra-ui/react'
-import { HardDriveIcon, SettingsIcon } from '@/components/icons'
+import { SettingsIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import { isNotDefined } from '@typebot.io/lib'
 import Link from 'next/link'
@@ -29,11 +29,10 @@ export const DashboardHeader = () => {
         maxW="1000px"
         flex="1"
       >
-        <Link href="/typebots" data-testid="typebot-logo">
+        <Link href="" data-testid="typebot-logo">
           <EmojiOrImageIcon
             boxSize="30px"
-            icon={workspace?.icon}
-            defaultIcon={HardDriveIcon}
+            icon={'/icons/logo.svg'}
           />
         </Link>
         <HStack>
