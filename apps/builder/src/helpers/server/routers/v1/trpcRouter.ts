@@ -16,6 +16,7 @@ import { whatsAppRouter } from '@/features/whatsapp/router'
 import { openAIRouter } from '@/features/blocks/integrations/openai/api/router'
 import { generateUploadUrl } from '@/features/upload/api/generateUploadUrl'
 import { zemanticAiRouter } from '@/features/blocks/integrations/zemanticAi/api/router'
+import {neoleadsRouter} from "@/features/neoleads/api/router";
 
 export const trpcRouter = router({
   getAppVersionProcedure,
@@ -27,6 +28,7 @@ export const trpcRouter = router({
   webhook: webhookRouter,
   results: resultsRouter,
   billing: billingRouter,
+  neoleads: neoleadsRouter,
   credentials: credentialsRouter,
   theme: themeRouter,
   collaborators: collaboratorsRouter,

@@ -14,7 +14,6 @@ import {
   BubbleBlockType,
   DraggableBlockType,
   InputBlockType,
-  IntegrationBlockType,
   LogicBlockType,
 } from '@typebot.io/schemas'
 import { useBlockDnd } from '@/features/graph/providers/GraphDndProvider'
@@ -157,16 +156,16 @@ export const BlocksSideBar = () => {
           </SimpleGrid>
         </Stack>
 
-        <Stack>
-          <Text fontSize="sm" fontWeight="semibold">
-            {scopedT('blockType.integrations.heading')}
-          </Text>
-          <SimpleGrid columns={2} spacing="3">
-            {Object.values(IntegrationBlockType).map((type) => (
-              <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />
-            ))}
-          </SimpleGrid>
-        </Stack>
+        {/*<Stack>*/}
+        {/*  <Text fontSize="sm" fontWeight="semibold">*/}
+        {/*    {scopedT('blockType.integrations.heading')}*/}
+        {/*  </Text>*/}
+        {/*  <SimpleGrid columns={2} spacing="3">*/}
+        {/*    {Object.values(IntegrationBlockType).map((type) => (*/}
+        {/*      <BlockCard key={type} type={type} onMouseDown={handleMouseDown} />*/}
+        {/*    ))}*/}
+        {/*  </SimpleGrid>*/}
+        {/*</Stack>*/}
 
         {draggedBlockType && (
           <Portal>

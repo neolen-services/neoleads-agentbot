@@ -9,14 +9,12 @@ import {
   HStack,
   IconButton,
   Stack,
-  Wrap,
   Text,
 } from '@chakra-ui/react'
 import { Plan } from '@typebot.io/prisma'
 import { isDefined, isNotDefined } from '@typebot.io/lib'
 import { isPublicDomainAvailableQuery } from '../queries/isPublicDomainAvailableQuery'
 import { EditableUrl } from './EditableUrl'
-import { integrationsList } from './embeds/EmbedButton'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { LockTag } from '@/features/billing/components/LockTag'
 import { UpgradeButton } from '@/features/billing/components/UpgradeButton'
@@ -27,6 +25,7 @@ import { parseDefaultPublicId } from '../helpers/parseDefaultPublicId'
 import { useI18n } from '@/locales'
 import { env } from '@typebot.io/env'
 import DomainStatusIcon from '@/features/customDomains/components/DomainStatusIcon'
+import {AssignInbox} from "@/features/neoleads/components/AssignInbox";
 
 export const SharePage = () => {
   const t = useI18n()
@@ -41,6 +40,7 @@ export const SharePage = () => {
   const publicId = typebot
     ? typebot?.publicId ?? parseDefaultPublicId(typebot.name, typebot.id)
     : ''
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isPublished = isDefined(publishedTypebot)
 
   const handlePathnameChange = (pathname: string) => {
@@ -95,7 +95,7 @@ export const SharePage = () => {
         <Stack maxW="1000px" w="full" pt="10" spacing={10}>
           <Stack spacing={4} align="flex-start">
             <Heading fontSize="2xl" as="h1">
-              Your typebot link
+              Your Neoagent link
             </Heading>
             {typebot && (
               <EditableUrl
@@ -148,19 +148,26 @@ export const SharePage = () => {
             ) : null}
           </Stack>
 
+          {/*<Stack spacing={4}>*/}
+          {/*  <Heading fontSize="2xl" as="h1">*/}
+          {/*    Embed your typebot*/}
+          {/*  </Heading>*/}
+          {/*  <Wrap spacing={7}>*/}
+          {/*    {integrationsList.map((IntegrationButton, idx) => (*/}
+          {/*      <IntegrationButton*/}
+          {/*        key={idx}*/}
+          {/*        publicId={publicId}*/}
+          {/*        isPublished={isPublished}*/}
+          {/*      />*/}
+          {/*    ))}*/}
+          {/*  </Wrap>*/}
+          {/*</Stack>*/}
+
           <Stack spacing={4}>
             <Heading fontSize="2xl" as="h1">
-              Embed your typebot
+              Connect Your Inbox
             </Heading>
-            <Wrap spacing={7}>
-              {integrationsList.map((IntegrationButton, idx) => (
-                <IntegrationButton
-                  key={idx}
-                  publicId={publicId}
-                  isPublished={isPublished}
-                />
-              ))}
-            </Wrap>
+            <AssignInbox />
           </Stack>
         </Stack>
       </Flex>
