@@ -32,21 +32,21 @@ export const SignInPage = ({ type }: Props) => {
           ? scopedT('signin.heading')
           : scopedT('register.heading')}
       </Heading>
-      {/*{type === 'signin' ? (*/}
-      {/*  <Text>*/}
-      {/*    {scopedT('signin.noAccountLabel.preLink')}{' '}*/}
-      {/*    <TextLink href="/register">*/}
-      {/*      {scopedT('signin.noAccountLabel.link')}*/}
-      {/*    </TextLink>*/}
-      {/*  </Text>*/}
-      {/*) : (*/}
-      {/*  <Text>*/}
-      {/*    {scopedT('register.alreadyHaveAccountLabel.preLink')}{' '}*/}
-      {/*    <TextLink href="/signin">*/}
-      {/*      {scopedT('register.alreadyHaveAccountLabel.link')}*/}
-      {/*    </TextLink>*/}
-      {/*  </Text>*/}
-      {/*)}*/}
+      {type === 'signin' ? (
+        <Text>
+          {scopedT('signin.noAccountLabel.preLink')}{' '}
+          <TextLink href="/register">
+            {scopedT('signin.noAccountLabel.link')}
+          </TextLink>
+        </Text>
+      ) : (
+        <Text>
+          {scopedT('register.alreadyHaveAccountLabel.preLink')}{' '}
+          <TextLink href="/signin">
+            {scopedT('register.alreadyHaveAccountLabel.link')}
+          </TextLink>
+        </Text>
+      )}
       <SignInForm defaultEmail={query.g?.toString()} />
       {type === 'signup' ? (
         <Text fontSize="sm" maxW="400px" textAlign="center">
