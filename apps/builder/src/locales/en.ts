@@ -169,10 +169,9 @@ export default {
   'billing.limitMessage.fileInput': 'use file input blocks',
   'billing.limitMessage.folder': 'create folders',
   'billing.upgradeAlert.buttonDefaultLabel': 'More info',
-  'neoleads.assignInbox.label': 'Select an inbox',
-  'neoleads.assignInbox.description': 'You can set an inbox from the list to this Neo Agent. The bot Neo Agent initially handle the conversation and transfer it to an agent when needed.',
-  'neoleads.assignInbox.primaryButton': 'Update',
-  'neoleads.assignInbox.secondaryButton': 'Disconnect Agent',
+  'neoleads.assignInbox.label': 'Select inboxes',
+  'neoleads.assignInbox.description': 'You can set multiple inbox from the list to this Neo Agent. The Neo Agent initially handle the conversation and transfer it to an agent when needed.',
+  'neoleads.assignInbox.primaryButton': 'Update Agent',
   'workspace.membersList.inviteInput.placeholder': 'colleague@company.com',
   'workspace.membersList.inviteButton.label': 'Invite',
   'workspace.membersList.unlockBanner.label':

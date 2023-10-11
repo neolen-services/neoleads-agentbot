@@ -46,8 +46,6 @@ export const listInboxes = authenticatedProcedure
       });
     }
 
-    console.log(response.payload, 'ssss')
-
     return {
       inboxes: response.payload,
     }

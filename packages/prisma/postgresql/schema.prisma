@@ -167,6 +167,7 @@ model Typebot {
   variables               Json
   edges                   Json
   theme                   Json
+  agentbot                Json?
   selectedThemeTemplateId String?
   settings                Json
   publicId                String?                   @unique

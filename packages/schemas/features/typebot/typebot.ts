@@ -17,6 +17,11 @@ export const groupSchema = z.object({
   blocks: z.array(blockSchema),
 })
 
+export const AgentBotSchema = z.object({
+  id: z.number(),
+  inboxes: z.array(z.string()),
+});
+
 const resultsTablePreferencesSchema = z.object({
   columnsOrder: z.array(z.string()),
   columnsVisibility: z.record(z.string(), z.boolean()),
@@ -38,6 +43,7 @@ export const typebotSchema = z.preprocess(
     edges: z.array(edgeSchema),
     variables: z.array(variableSchema),
     theme: themeSchema,
+    agentbot: AgentBotSchema.nullable(),
     selectedThemeTemplateId: z.string().nullable(),
     settings: settingsSchema,
     createdAt: z.date(),

@@ -1,52 +1,89 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useScopedI18n} from '@/locales'
 import {
   Box,
   Flex,
   Text,
   Button,
-  Select, SimpleGrid
+  CheckboxGroup, HStack, Checkbox
 } from "@chakra-ui/react";
 import {trpc} from "@/lib/trpc";
+import { useToast } from '@/hooks/useToast'
+import {useTypebot} from "@/features/editor/providers/TypebotProvider";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const AssignInbox = () => {
   const scopedT = useScopedI18n('neoleads.assignInbox')
   const { data } = trpc.neoleads.listInboxes.useQuery()
+  const { typebot } = useTypebot()
+  const { showToast } = useToast()
+
+  const { mutate: createAgentBot, isLoading: isCreating } =
+    trpc.neoleads.createAgentBot.useMutation({
+      onError: (error) =>
+        showToast({
+          title: 'Error while connecting inbox',
+          description: error.message,
+        }),
+      onSuccess: () => {
+        showToast({
+          title: 'Successfully connected to Inbox',
+        })
+      },
+    })
+
+  const [checkedValues, setCheckedValues] = useState<string[]>([]);
+
+  useEffect(() => {
+    if(typebot?.agentbot?.inboxes) {
+      console.log(typebot.agentbot.inboxes)
+      setCheckedValues(typebot.agentbot.inboxes);
+    }
+  }, [typebot]);
+
+  const handleCheckboxChange = (values: string[]) => {
+    console.log(values)
+    setCheckedValues(values);
+  };
 
   return (
     <Box style={{paddingInline: '10px'}}>
-      <SimpleGrid  minChildWidth='320px' spacing='40px'>
         <Box>
-          <Text fontWeight="bold" mb={3}>
-            {scopedT('label')}
-          </Text>
           <Text mb={5}>
             {scopedT('description')}
           </Text>
         </Box>
         <Box>
           <Flex align="center">
-            <Select
-              placeholder="Select option"
-              variant="outline"
-              w="full"
-              mb={3}
+            <CheckboxGroup
+              onChange={handleCheckboxChange}
+              value={checkedValues}
             >
-              {data?.inboxes.map((inbox) => (
-                <option key={inbox.id} value={inbox.id}>{inbox.name}</option>
-              ))}
-            </Select>
+              <HStack spacing='24px'>
+                {data?.inboxes.map((inbox) => (
+                  <Checkbox key={inbox.id} value={inbox.id.toString()}>{inbox.name}</Checkbox>
+                ))}
+              </HStack>
+            </CheckboxGroup>
           </Flex>
-          <Flex justify="space-between" mt={3}>
-            <Button colorScheme="blue" variant="solid">
+          <Flex mt={3}>
+            <Button
+              isLoading={isCreating}
+              colorScheme="blue"
+              variant="solid"
+              onClick={() => {
+                if (typebot)
+                  createAgentBot({
+                    typebotId: typebot.id,
+                    inboxIds: checkedValues.map((x) => parseInt(String(x)))
+                  })
+              }}
+            >
               {scopedT('primaryButton')}
-            </Button>
-            <Button variant="outline">
-              {scopedT('secondaryButton')}
             </Button>
           </Flex>
         </Box>
-      </SimpleGrid>
     </Box>
   )
 }

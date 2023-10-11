@@ -165,9 +165,9 @@ export const SharePage = () => {
 
           <Stack spacing={4}>
             <Heading fontSize="2xl" as="h1">
-              Connect Your Inbox
+              Connect Your Inboxes
             </Heading>
-            <AssignInbox />
+            <AssignInbox/>
           </Stack>
         </Stack>
       </Flex>
