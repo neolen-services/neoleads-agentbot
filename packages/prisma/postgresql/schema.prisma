@@ -325,6 +325,15 @@ model ThemeTemplate {
   workspaceId String
 }
 
+model NeoleadsWebhook {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  typebotId   String
+  sessionId   String
+  conversationId    Int
+}
+
 enum WorkspaceRole {
   ADMIN
   MEMBER

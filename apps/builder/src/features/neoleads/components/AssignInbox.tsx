@@ -76,7 +76,7 @@ export const AssignInbox = () => {
                 if (typebot)
                   createAgentBot({
                     typebotId: typebot.id,
-                    inboxIds: checkedValues.map((x) => parseInt(String(x)))
+                    inboxIds: checkedValues
                   })
               }}
             >

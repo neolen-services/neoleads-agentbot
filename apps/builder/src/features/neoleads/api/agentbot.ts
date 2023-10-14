@@ -18,7 +18,7 @@ export const createAgentBot = authenticatedProcedure
   .input(
     z.object({
       typebotId: z.string(),
-      inboxIds: z.array(z.number()),
+      inboxIds: z.array(z.string()),
     })
   )
   .output(
@@ -64,8 +64,8 @@ export const createAgentBot = authenticatedProcedure
             body: JSON.stringify({
               name: typebotId,
               description: "Typebot description",
-              outgoing_url: env.NEXT_PUBLIC_VIEWER_URL + "/neoleads/callback",
-              inboxes: inboxIds
+              outgoing_url: env.NEXT_PUBLIC_VIEWER_URL + "/api/v1/neoleads/webhook",
+              inbox_ids: inboxIds
             })
           });
 
